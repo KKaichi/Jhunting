@@ -1,0 +1,50 @@
+{% extends "auth/base.html" %}
+{% block title %}ログイン{% endblock %}
+{% block content %}
+<div class="logo">
+  <a href="{{url_for('home.index')}}">KAICHI_APP</a>
+</div>
+<div class="form-wrapper">
+  <h2>KAICHI_APPにログイン</h2>
+  <form action="{{url_for('auth.login')}}" method="POST" novalidate="novalidate">
+    {{form.csrf_token}}
+    <div class="form-item">
+      {% for message in get_flashed_messages() %}
+      {% if message == "パスワードの再設定用メールを送信しました．" or message == "パスワードを再設定しました．" %}
+      <p style="color:red;">※{{message}}</p>
+      {% endif %}
+      {% endfor %}
+      <p class="discription">メールアドレス <i class="fa-regular fa-envelope"></i></p>
+      <p>{{form.email}}</p>
+      {% for message in get_flashed_messages() %}
+      {% if message == "入力されたメールアドレスは登録されていません．" %}
+      <p style="color:red;">※{{message}}</p>
+      {% endif %}
+      {% endfor %}
+      {% for error in form.email.errors %}
+      <span style="color:red;">※{{error}}</span>
+      {% endfor%}
+    </div>
+    <div class="form-item">
+      <p class="discription">パスワード <i class="fa-regular fa-lock-keyhole"></i></p>
+      <p>{{form.password}}</p>
+      {% for message in get_flashed_messages() %}
+      {% if message == "パスワードが違います．" %}
+      <p style="color:red;">※{{message}}</p>
+      {% endif %}
+      {% endfor %}
+      {% for error in form.password.errors %}
+      <span style="color:red;">※{{error}}</span>
+      {% endfor %}
+    </div>
+    <div class="button-panel">
+      <p>{{form.submit()}}</p>
+    </div>
+  </form>
+  <div class="form-footer">
+    <p><a href="{{url_for('auth.signup')}}">新規登録</a></p>
+    <p><a href="{{url_for('reset_password.index')}}">Forgot password?</a></p>
+  </div>
+</div>
+</form>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "mypage/base.html" %}
+{% block title %}{{current_user.username}}{% endblock %}
+{% block content %}
+<div class="mytable">
+  <table id="mytable">
+    <tr>
+      <th>\</th>
+      <script>
+        var year = {{ date.year }}
+        var month = {{ date.month }}
+        var day = {{ date.day }}
+        max_day = { 1: 31, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31 }
+        //閏年
+        if (year % 100 == 0 && year % 400 != 0) {
+          max_day[2] = 28
+        }
+        else if (year % 4 == 0) {
+          max_day[2] = 29
+        }
+        else {
+          max_day[2] = 28
+        }
+
+        for (var colum = 0; colum < 90; colum++) {
+          if (colum == 0 || day == 1) {
+            document.write(`<th id=${year}-${month}-${day}>` + month + '/' + day + '</th>');
+          }
+          else {
+            document.write(`<th id=${year}-${month}-${day}>` + day + '</th>');
+          }
+          day += 1
+          if (day > max_day[month]) {
+            day = 1
+            month += 1
+            if (month >= 12) {
+              month = 1
+              year += 1
+            }
+          }
+        }
+        var tableEle = document.getElementById('mytable');
+        for (var row = 0; row < 1; row++) {
+          var tr = document.createElement('tr');
+          for (var colum = 0; colum < 91; colum++) {
+            if (colum == 0) {
+              var th = document.createElement('th');
+              th.innerHTML = `株式会社${row}`;
+              tr.appendChild(th);
+            }
+            else {
+              var td = document.createElement('td');
+              td.ondblclick = function () {
+                location.href = "{{url_for('mypage.add_event',company_name='company_name' ,year_month_day = 'year_month_day')}}".replace("year_month_day", tableEle.rows[0].cells[this.cellIndex].id).replace("company_name", tableEle.rows[this.parentNode.rowIndex].cells[0].innerHTML);
+              };
+              td.innerHTML = `<div class=target><span></span></div>`;
+              tr.appendChild(td);
+            }
+          }
+          tableEle.appendChild(tr);
+        }
+      </script>
+    </tr>
+  </table>
+</div>
+<form action="{{url_for('mypage.index')}}" method='POST'>
+  {{form.csrf_token}}
+
+  <div class="company_register">
+    <div class="company">
+      <span>{{form.company_name(placeholder="新規会社登録")}}</span>
+    </div>
+    <div class="submit-panel">
+      <span>{{form.submit()}}</span>
+    </div>
+    <div class="to_csv-panel">
+      <a href="javascript:void(0)" class="to_csv" onclick="output()" id="output_btn">CSV出力</a>
+    </div>
+  </div>
+
+</form>
+{% endblock %}

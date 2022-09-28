@@ -1,0 +1,60 @@
+{% extends "account/base.html" %}
+{% block title %}アカウント情報{% endblock %}
+{% block content %}
+<form action="{{url_for('account.index')}}" method="post" enctype="multipart/form-data" novalidate="novalidate">
+  {{form.csrf_token}}
+  <div class=profile>
+    <p class="username">@{{current_user.username}}</p>
+    {% if user_image != None %}
+    <div class="photo1">
+      <img class="photo2" src="{{url_for('account.send',filename=user_image.UserImage.image_path)}}">
+    </div>
+    {% else %}
+    <div class="circlediv">
+      <div class="circle1">
+        <p>{{current_user.username[0]}}</p>
+      </div>
+    </div>
+    {% endif %}
+    <div class="image">
+      <div class="image_upload">
+        ファイルを選択
+        <p>{{form.image}}</p>
+      </div>
+      <p class="filename"></p>
+    </div>
+    <div class="image_submit">
+      <p>{{form.submit}}</p>
+    </div>
+    {% for error in form.image.errors %}
+    <div class="error"><span style="color: red;">*{{error}}</span></div>
+    {% endfor %}
+    <hr />
+    <div class="edit">
+      <h2>プロフィール編集(TODO)</h2>
+      <ul>
+        <li>
+          アカウント名&emsp;<i class="fas fa-edit"></i>
+        </li>
+        <li>
+          メールアドレス&emsp;<i class="fas fa-edit"></i>
+        </li>
+        <li>
+          パスワード&emsp;<i class="fas fa-edit"></i>
+        </li>
+      </ul>
+    </div>
+  </div>
+</form>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  $('input').on('change', function () {
+    var file = $(this).prop('files')[0];
+    $('.filename').text(file.name);
+  });
+</script>
+{% endblock %}

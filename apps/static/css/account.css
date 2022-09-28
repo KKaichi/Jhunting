@@ -1,0 +1,111 @@
+body {
+  background: #F4F5F7;
+  color: #5e5e5e;
+}
+
+.profile {
+  background: #ffffff;
+  color: #000000;
+  margin: 3rem auto;
+  padding: 1rem 1rem 1rem 1rem;
+  max-width: 90%;
+}
+
+.username {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.icon {
+  margin: 0 auto
+}
+
+.photo1 {
+  text-align: center;
+}
+
+.photo2 {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+}
+
+.circle1 {
+  display: inline-block;
+  background: #797979;
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  color: #fff;
+  font-size: 7rem;
+  text-align: center;
+  line-height: 10rem;
+  text-decoration: none;
+}
+
+.filename {
+  padding: 0.2rem;
+}
+
+.image {
+  text-align: center;
+
+}
+
+.circlediv {
+  text-align: center;
+}
+
+.error {
+  text-align: center;
+}
+
+.image_upload {
+  display: inline-block;
+
+  overflow: hidden;
+  position: relative;
+  height: 2rem;
+  width: 10%;
+  border: 0.1rem solid #000000;
+  border-radius: 1rem;
+  background: #00CA00;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.8rem;
+}
+
+input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1rem;
+}
+
+.image_submit {
+  text-align: center;
+  padding: 0rem 0rem 1rem 0rem;
+}
+
+.image_submit input {
+  background: #00CA00;
+  border: 0.1rem solid #000000;
+  border-radius: 1rem;
+  color: #ffffff;
+  font-size: 1rem;
+  height: 2rem;
+  transition: border-color 0.3s;
+  width: 10%;
+
+}
+
+.edit {
+  text-align: center;
+  padding: 1rem 0rem 0rem 0rem;
+}
+
+
+li {
+  list-style: none;
+}

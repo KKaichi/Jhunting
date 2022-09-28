@@ -1,0 +1,56 @@
+{% extends "mypage/base.html" %}
+{% block title %}add_event{% endblock %}
+{% block content %}
+<form action="{{url_for('mypage.add_event',company_name=company_name,year_month_day=year_month_day)}}" method='POST'
+  novalidate="novalidate">
+  <div class="form-wrapper">
+    <h2>{{company_name}}({{month}}/{{day}})のイベントを追加する</h2>
+    <div class="form-radio">
+      <p class="discription">イベント</p>
+      {{form.csrf_token}}
+      {% for radio in form.event_type %}
+      {% if radio.id == "event_type-0" %}
+      {{radio}} <span class="es_radio">{{radio.label}}</span>
+      {% elif radio.id == "event_type-1" %}
+      {{radio}} <span class="test_radio">{{radio.label}}</span>
+      {% elif radio.id == "event_type-2" %}
+      {{radio}} <span class="gd_radio">{{radio.label}}</span>
+      {% elif radio.id == "event_type-3" %}
+      {{radio}} <span class="mensetu_radio">{{radio.label}}</span>
+      {% elif radio.id == "event_type-4" %}
+      {{radio}} <span class="mendan_radio">{{radio.label}}</span>
+      {% elif radio.id == "event_type-5" %}
+      {{radio}} <span class="seminer_radio">{{radio.label}}</span>
+      {% elif radio.id == "event_type-6" %}
+      {{radio}} <span class="ob_radio">{{radio.label}}</span>
+      {% elif radio.id == "event_type-7" %}
+      {{radio}} <span class="intern_radio">{{radio.label}}</span>
+      {% endif %}
+      {% endfor %}
+      {% for error in form.event_type.errors %}
+      <span style="color:red;">* どれか1つ選択してください．</span>
+      {% endfor%}
+    </div>
+    <div class="big_time">
+      <div class="time">
+        <p class="discription">開始</p>
+        <span>{{form.start_date(value=year+"-"+month+"-"+day,min=year+"-"+month+"-"+day,max="2025-03-31")}}</span>
+        <span>{{form.start_time(value="00:00")}}</span>
+      </div>
+      <div class="time">
+        <p class="discription">終了</p>
+        <span>{{form.finish_date(value=year+"-"+month+"-"+day,min=year+"-"+month+"-"+day,max="2025-03-31")}}</span>
+        <span>{{form.finish_time(value="23:00")}}</span>
+      </div>
+    </div>
+    <div class="memo">
+      <p class="discription">メモ</p>
+      <span>{{form.discription(placeholder="問い合わせ内容")}}</span>
+    </div>
+    <div class="button-panel">
+      <p>{{form.submit(default = month)}}</p>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

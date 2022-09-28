@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* body */
+body {
+  background: #F4F5F7;
+  color: #5e5e5e;
+}
+
+.logo {
+  display: inline-block;
+  margin: 1rem 0rem 1rem 5rem;
+  padding: 2rem 1rem;
+  /* インラインブロック要素にする */
+  font-size: 2rem;
+  color: #ffffff;
+  background-color: #00CA00;
+
+}
+
+
+
+/* Form Layout */
+.form-wrapper {
+  background: #ffffff;
+  color: #000000;
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 90%;
+}
+
+h2 {
+  text-align: center;
+  padding: 1rem 0rem 3rem 0rem;
+}
+
+.discription {
+  padding: 0em 0em 0em 1em;
+}
+
+form {
+  padding: 0 1.5em;
+}
+
+
+.form-item {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+
+.form-item input {
+  background: #ffffff;
+  border: 0.1rem solid #000000;
+  border-radius: 1rem;
+  color: #666;
+  font-size: 1em;
+  height: 3rem;
+  transition: border-color 0.3s;
+  width: 100%;
+  padding: 1rem;
+}
+
+
+.form-item input:focus {
+  border-bottom: 2px solid #c0c0c0;
+  outline: none;
+}
+
+
+.button-panel {
+  margin: 2em 0 0;
+  width: 100%;
+}
+
+.button-panel p {
+  text-align: center;
+}
+
+.button-panel input {
+  background: #00CA00;
+  border: 0.1rem solid #000000;
+  border-radius: 1rem;
+  color: #ffffff;
+  font-size: 1rem;
+  height: 3rem;
+  transition: border-color 0.3s;
+  width: 20%;
+}
+
+.form-footer {
+  font-size: 1em;
+  padding: 1em 0;
+  text-align: center;
+}
+
+.form-footer a {
+  color: #8c8c8c;
+  text-decoration: none;
+  transition: border-color 0.3s;
+}
+
+.form-footer a:hover {
+  border-bottom: 1px solid #8c8c8c;
+}

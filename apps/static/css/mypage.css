@@ -1,0 +1,180 @@
+/* 表 */
+.mytable {
+  overflow-x: auto;
+  width: 95%;
+  min-width: 95%;
+  margin: auto;
+  table-layout: fixed;
+}
+
+.mytable table {
+  margin: 0;
+  border-spacing: 0;
+}
+
+.mytable td {
+  white-space: nowrap;
+  border-right: 1px solid #999;
+  border-bottom: 1px solid #999;
+  background: #FFF;
+  padding: 5px;
+  max-width: 2.5rem;
+  min-width: 2.5rem;
+}
+
+.mytable th {
+  white-space: nowrap;
+  border-right: 1px solid #999;
+  border-bottom: 1px solid #999;
+  background: #f2f2f2;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+.mytable tr:first-child th {
+  border-top: 1px solid #999;
+}
+
+.mytable th:first-child {
+  border-left: 1px solid #999;
+  min-width: 10rem;
+  height: 2rem;
+}
+
+.mytable tr:first-child th:first-child {
+  z-index: 1;
+}
+
+.target {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+span {
+  display: block;
+  margin: 0.1rem 0rem 0.1rem 0rem;
+}
+
+.es {
+  background: #18ebf9;
+  color: #ffffff;
+}
+
+.interview {
+  background: #FFE200;
+  color: #ffffff;
+}
+
+.es_radio {
+  display: inline-block;
+  background: #18ebf9;
+  color: #ffffff;
+  padding: 5px;
+}
+
+.test_radio {
+  display: inline-block;
+  background: #fa8072;
+  color: #ffffff;
+  padding: 5px;
+}
+
+.gd_radio {
+  display: inline-block;
+  background: #ba55d3;
+  color: #ffffff;
+  padding: 5px;
+}
+
+.mensetu_radio {
+  display: inline-block;
+  background: #ff0000;
+  color: #ffffff;
+  padding: 5px;
+}
+
+.mendan_radio {
+  display: inline-block;
+  background: #b0c4de;
+  color: #ffffff;
+  padding: 5px;
+}
+
+.seminer_radio {
+  display: inline-block;
+  background: #90ee90;
+  color: #ffffff;
+  padding: 5px;
+}
+
+.ob_radio {
+  display: inline-block;
+  background: #4169e1;
+  color: #ffffff;
+  padding: 5px;
+}
+
+.intern_radio {
+  display: inline-block;
+  background: #d2691e;
+  color: #ffffff;
+  padding: 5px;
+}
+
+/* 会社名 */
+
+.company_register {
+  display: flex;
+  margin-top: 1rem;
+  margin-left: 2.5%;
+}
+
+.company {
+  text-align: center;
+  padding: 0rem 0rem 1rem 0rem;
+}
+
+.company input {
+  background: #ffffff;
+  border: 0.1rem solid #000000;
+  color: #666;
+  font-size: 1em;
+  height: 2rem;
+  transition: border-color 0.3s;
+  width: 10rem;
+}
+
+
+.submit-panel {
+  padding-left: 1rem;
+  width: 100%;
+}
+
+.submit-panel input {
+  background: #00CA00;
+  border: 0.1rem solid #000000;
+  color: #ffffff;
+  font-size: 1rem;
+  height: 2rem;
+  transition: border-color 0.3s;
+  width: 40px;
+}
+
+/* csv */
+
+.to_csv-panel {
+  width: 100%;
+  margin-right: 2.5%;
+  text-align: right;
+  padding: 0.5rem;
+}
+
+.to_csv {
+  background: #00CA00;
+  border: 0.1rem solid #000000;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  width: 40px;
+}

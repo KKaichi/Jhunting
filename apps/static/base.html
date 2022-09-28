@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}{% endblock %}</title>
+  <!--<link rel="stylesheet" href="{{url_for('static',filename='css/reset.css')}}" />-->
+  <!--<link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.css')}}" />-->
+  <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}" />
+</head>
+
+<body>
+  <header>
+    <div class="header-logo">
+      KAICHI_APP
+    </div>
+    <div class="header-list">
+      <ul>
+        <li><a class="login" href="{{url_for('auth.logout')}}">ログアウト</a></li>
+        <li><a class="signup" href="{{url_for('contact.index')}}">お問い合わせ</a></li>
+        <li><a class="circle" href="{{url_for('account.index')}}">{{current_user.username[0]}}</a>
+      </ul>
+
+    </div>
+
+    </div>
+  </header>
+  <!-- <div>
+    {% if current_user.is_authenticated %}
+    <p>
+      <span>{{current_user.username}}</span>
+      <spna><a href="{{url_for('auth.logout')}}">ログアウト</a></spna>
+    </p>
+    {% endif %}
+    </div> -->
+  {% block content %}{% endblock %}
+</body>
+
+</html>
