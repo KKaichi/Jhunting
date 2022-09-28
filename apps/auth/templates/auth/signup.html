@@ -2,10 +2,10 @@
 {% block title %}新規登録{% endblock %}
 {% block content %}
 <div class="logo">
-  <a href="{{url_for('home.index')}}">KAICHI_APP</a>
+  <a href="{{url_for('home.index')}}">Jhanting</a>
 </div>
 <div class="form-wrapper">
-  <h2>KAICHI_APPへようこそ</h2>
+  <h2>Jhantingへようこそ</h2>
   <form action="{{url_for('auth.signup',next=request.args.get('next'))}}" method="POST" novalidate="novalidate">
     {{form.csrf_token}}
     <div class="form-item">

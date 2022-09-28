@@ -2,10 +2,10 @@
 {% block title %}ログイン{% endblock %}
 {% block content %}
 <div class="logo">
-  <a href="{{url_for('home.index')}}">KAICHI_APP</a>
+  <a href="{{url_for('home.index')}}">Jhanting</a>
 </div>
 <div class="form-wrapper">
-  <h2>KAICHI_APPにログイン</h2>
+  <h2>Jhantingにログイン</h2>
   <form action="{{url_for('auth.login')}}" method="POST" novalidate="novalidate">
     {{form.csrf_token}}
     <div class="form-item">

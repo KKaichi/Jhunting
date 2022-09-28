@@ -175,6 +175,11 @@ span {
   border: 0.1rem solid #000000;
   color: #ffffff;
   font-size: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.3rem;
+  padding-right: 0.1rem;
+  padding-left: 0.1rem;
+  text-align: center;
   transition: border-color 0.3s;
   width: 40px;
 }
