@@ -1,6 +1,3 @@
-{% extends "crud/base.html" %}
-{% block title %}ユーザ編集{% endblock %}
-{% block content %}
 
 <h2>ユーザ編集</h2>
 <form action="{{url_for('crud.edit_user',user_id=user.id)}}" method="POST" novalidate="novalidate">
@@ -25,4 +22,3 @@
   {{form.csrf_token}}
   <input type="submit" value="削除">
 </form>
-{% endblock %}

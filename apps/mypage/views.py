@@ -1,12 +1,15 @@
+from collections import defaultdict
 from datetime import datetime
 
 from apps.account.models import UserImage
 from apps.app import db
 from apps.crud.models import User
 from apps.mypage.forms import AddCompanyForm, AddEventForm
+from apps.mypage.models import Company, Event
 from flask import (
     Blueprint,
     current_app,
+    flash,
     redirect,
     render_template,
     send_from_directory,
@@ -33,10 +36,38 @@ def index():
     company_form = AddCompanyForm()
 
     if company_form.validate_on_submit():
+        company = Company(
+            user_id=current_user.id,
+            company_name=company_form.company_name.data,
+        )
+        if company.is_duplicate_company_name():
+            flash("登録済みです．")
+            return redirect(url_for("mypage.index"))
+
+        db.session.add(company)
+        db.session.commit()
+
         return redirect(url_for("mypage.index"))
 
+    companise = Company.query.filter_by(user_id=current_user.id).all()
+    if companise is not None:
+        company_list = []
+        company_event_dict = defaultdict(list)
+        for company in companise:
+            company_list.append(company.company_name)
+            events = Event.query.filter_by(
+                user_id=current_user.id, company_id=company.id
+            ).all()
+            for event in events:
+                company_event_dict[company.company_name].append(event)
+
     return render_template(
-        "mypage/index.html", user_image=user_image, form=company_form, date=date
+        "mypage/index.html",
+        user_image=user_image,
+        form=company_form,
+        date=date,
+        company_event_dict=company_event_dict,
+        company_list=company_list,
     )
 
 
@@ -63,6 +94,22 @@ def add_event(company_name, year_month_day):
     form = AddEventForm()
 
     if form.validate_on_submit():
+        company = Company.query.filter_by(
+            user_id=current_user.id, company_name=company_name
+        ).first()
+        event = Event(
+            user_id=current_user.id,
+            company_id=company.id,
+            event_name=form.event_type.data,
+            start_day=form.start_date.data,
+            start_time=form.start_time.data,
+            finish_day=form.finish_date.data,
+            finish_time=form.finish_time.data,
+            memo=form.discription.data,
+        )
+        db.session.add(event)
+        db.session.commit()
+
         return redirect(url_for("mypage.index"))
 
     return render_template(

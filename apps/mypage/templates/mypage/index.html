@@ -1,6 +1,11 @@
 {% extends "mypage/base.html" %}
 {% block title %}{{current_user.username}}{% endblock %}
 {% block content %}
+{% for i in company_event_dict["株式会社0"] %}
+{{i.event_name}}
+{% endfor %}
+{{company_list}}
+{% if company_event_dict is not none %}
 <div class="mytable">
   <table id="mytable">
     <tr>
@@ -9,6 +14,9 @@
         var year = {{ date.year }}
         var month = {{ date.month }}
         var day = {{ date.day }}
+        var company_list = {{ company_list | tojson }}
+        var company_number = company_list.length
+
         max_day = { 1: 31, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31 }
         //閏年
         if (year % 100 == 0 && year % 400 != 0) {
@@ -39,12 +47,12 @@
           }
         }
         var tableEle = document.getElementById('mytable');
-        for (var row = 0; row < 1; row++) {
+        for (var row = 0; row < company_number; row++) {
           var tr = document.createElement('tr');
           for (var colum = 0; colum < 91; colum++) {
             if (colum == 0) {
               var th = document.createElement('th');
-              th.innerHTML = `株式会社${row}`;
+              th.innerHTML = company_list[row];
               tr.appendChild(th);
             }
             else {
@@ -62,19 +70,25 @@
     </tr>
   </table>
 </div>
+{% endif %}
 <form action="{{url_for('mypage.index')}}" method='POST'>
   {{form.csrf_token}}
 
   <div class="company_register">
     <div class="company">
       <span>{{form.company_name(placeholder="新規会社登録")}}</span>
+      {% for message in get_flashed_messages() %}
+      <p style="color:red;">※{{message}}</p>
+      {% endfor %}
     </div>
     <div class="submit-panel">
       <span>{{form.submit()}}</span>
     </div>
+    {% if company_event_dict is not none %}
     <div class="to_csv-panel">
       <a href="javascript:void(0)" class="to_csv" onclick="output()" id="output_btn">CSV出力</a>
     </div>
+    {% endif %}
   </div>
 
 </form>
