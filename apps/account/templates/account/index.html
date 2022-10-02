@@ -10,10 +10,8 @@
       <img class="photo2" src="{{url_for('account.send',filename=user_image.UserImage.image_path)}}">
     </div>
     {% else %}
-    <div class="circlediv">
-      <div class="circle1">
-        <p>{{current_user.username[0]}}</p>
-      </div>
+    <div class="photo1">
+      <img class="photo2" src="{{url_for('mypage.send',filename='icon.png')}}">
     </div>
     {% endif %}
     <div class="image">

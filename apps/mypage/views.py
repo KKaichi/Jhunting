@@ -52,21 +52,32 @@ def index():
     companise = Company.query.filter_by(user_id=current_user.id).all()
     if companise is not None:
         company_list = []
-        company_event_dict = defaultdict(list)
-        for company in companise:
-            company_list.append(company.company_name)
+        company_event = [[] for i in range(len(companise))]
+        for count in range(len(companise)):
+            company_list.append(companise[count].company_name)
             events = Event.query.filter_by(
-                user_id=current_user.id, company_id=company.id
+                user_id=current_user.id, company_id=companise[count].id
             ).all()
             for event in events:
-                company_event_dict[company.company_name].append(event)
+                company_event[count].append(
+                    [
+                        event.event_name,
+                        str(event.start_day),
+                        str(event.start_time),
+                        str(event.finish_day),
+                        str(event.finish_time),
+                        event.memo,
+                    ]
+                )
+    if not company_list:
+        company_list = 0
 
     return render_template(
         "mypage/index.html",
         user_image=user_image,
         form=company_form,
         date=date,
-        company_event_dict=company_event_dict,
+        company_event=company_event,
         company_list=company_list,
     )
 

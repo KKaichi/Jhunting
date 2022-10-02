@@ -1,11 +1,8 @@
 {% extends "mypage/base.html" %}
 {% block title %}{{current_user.username}}{% endblock %}
 {% block content %}
-{% for i in company_event_dict["株式会社0"] %}
-{{i.event_name}}
-{% endfor %}
-{{company_list}}
-{% if company_event_dict is not none %}
+
+{% if company_list != 0 %}
 <div class="mytable">
   <table id="mytable">
     <tr>
@@ -16,6 +13,10 @@
         var day = {{ date.day }}
         var company_list = {{ company_list | tojson }}
         var company_number = company_list.length
+        var company_event = {{ company_event | tojson }}
+        var month_day_index = {}
+        var event_class = { "ES": "es", "テスト": "test", "GD": "gd", "面接": "mensetu", "面談": "mendan", "セミナー": "seminer", "OB訪問": "ob", "インターン": "intern" }
+
 
         max_day = { 1: 31, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31 }
         //閏年
@@ -36,6 +37,7 @@
           else {
             document.write(`<th id=${year}-${month}-${day}>` + day + '</th>');
           }
+          month_day_index[month + "/" + day] = colum
           day += 1
           if (day > max_day[month]) {
             day = 1
@@ -66,6 +68,33 @@
           }
           tableEle.appendChild(tr);
         }
+        for (i = 0; i < company_event.length; i++) {
+          for (j = 0; j < company_event[i].length; j++) {
+            var event_name = company_event[i][j][0]
+            var start_date = company_event[i][j][1].split('-')
+            var start_year = start_date[0]
+            var start_month = Number(start_date[1])
+            var start_day = Number(start_date[2])
+            var start_time = company_event[i][j][2].split(':')
+            var start_hour = start_time[0]
+            var start_minitue = start_time[1]
+            var finish_date = company_event[i][j][3].split('-')
+            var finish_year = finish_date[0]
+            var finish_month = Number(finish_date[1])
+            var finish_day = Number(finish_date[2])
+            var finish_time = company_event[i][j][4].split(':')
+            var finish_hour = finish_time[0]
+            var finish_minitue = finish_time[1]
+            var memo = company_event[i][j][5]
+            if (start_month + "/" + start_day in month_day_index) {
+              cell_index = month_day_index[start_month + "/" + start_day]
+              tableEle.rows[i + 1].cells[cell_index + 1].innerHTML += `<div class=target><span class=` + event_class[event_name] + `> ` + event_name.substr(0, 2) + `</span ></div >`;
+            }
+
+          }
+        }
+
+
       </script>
     </tr>
   </table>

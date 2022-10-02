@@ -22,7 +22,7 @@ body {
   /* インラインブロック要素にする */
   font-size: 2rem;
   color: #ffffff;
-  background-color: #00CA00;
+  background-color: #666666;
 
 }
 
@@ -86,7 +86,7 @@ form {
 }
 
 .button-panel input {
-  background: #00CA00;
+  background: #666666;
   border: 0.1rem solid #000000;
   border-radius: 1rem;
   color: #ffffff;
@@ -110,4 +110,16 @@ form {
 
 .form-footer a:hover {
   border-bottom: 1px solid #8c8c8c;
+}
+
+/*footer*/
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem 0rem 1rem 0rem;
+  background-color: #888888;
+  color: #ffffff;
+  text-align: center;
 }

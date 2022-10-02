@@ -10,22 +10,27 @@
 </head>
 
 <body>
-  <header>
-    <h1 class="logo"><a class="logolink" href="{{url_for('home.index')}}">
-        Jhanting</a>
-    </h1>
-    <nav class="nav">
-      <ul class="menu-group">
-        <li class="menu-item">
-          <a class=login href="{{url_for('auth.login')}}">ログイン</a>
-        </li>
-        <li class="menu-item">
-          <a class=signup href="{{url_for('auth.signup')}}">新規登録</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  {% block content %}{% endblock %}
+  <div class="footerFixed">
+    <header>
+      <h1 class="logo"><a class="logolink" href="{{url_for('home.index')}}">
+          Jhanting</a>
+      </h1>
+      <nav class="nav">
+        <ul class="menu-group">
+          <li class="menu-item">
+            <a class=login href="{{url_for('auth.login')}}">ログイン</a>
+          </li>
+          <li class="menu-item">
+            <a class=signup href="{{url_for('auth.signup')}}">新規登録</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    {% block content %}{% endblock %}
+    <footer>
+      <p>© 2022 Kaichi Nihira</p>
+    </footer>
 </body>
+</div>
 
 </html>

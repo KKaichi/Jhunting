@@ -25,22 +25,9 @@ body {
 }
 
 .photo2 {
-  width: 10rem;
-  height: 10rem;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-}
-
-.circle1 {
-  display: inline-block;
-  background: #797979;
-  border-radius: 50%;
-  width: 10rem;
-  height: 10rem;
-  color: #fff;
-  font-size: 7rem;
-  text-align: center;
-  line-height: 10rem;
-  text-decoration: none;
 }
 
 .filename {
@@ -50,10 +37,6 @@ body {
 .image {
   text-align: center;
 
-}
-
-.circlediv {
-  text-align: center;
 }
 
 .error {
@@ -69,7 +52,7 @@ body {
   width: 10%;
   border: 0.1rem solid #000000;
   border-radius: 1rem;
-  background: #00CA00;
+  background: #666666;
   color: #ffffff;
   text-align: center;
   line-height: 1.8rem;
@@ -89,7 +72,7 @@ input[type="file"] {
 }
 
 .image_submit input {
-  background: #00CA00;
+  background: #666666;
   border: 0.1rem solid #000000;
   border-radius: 1rem;
   color: #ffffff;

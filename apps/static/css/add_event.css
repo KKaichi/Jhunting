@@ -112,7 +112,7 @@ h2 {
   background: #ffffff;
   border: 0.1rem solid #000000;
   border-radius: 1rem;
-  color: #666;
+  color: #666666;
   font-size: 1em;
   height: 10rem;
   transition: border-color 0.3s;
@@ -130,7 +130,7 @@ h2 {
 }
 
 .button-panel input {
-  background: #00CA00;
+  background: #666666;
   border: 0.1rem solid #000000;
   border-radius: 1rem;
   color: #ffffff;

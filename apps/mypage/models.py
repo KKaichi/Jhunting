@@ -1,6 +1,7 @@
 from apps.app import db
 from flask_login import current_user
 
+
 class Event(db.Model):
     __tablename__ = "events"
     id = db.Column(db.Integer, primary_key=True)
@@ -22,5 +23,8 @@ class Company(db.Model):
 
     def is_duplicate_company_name(self):
         return (
-            Company.query.filter_by(user_id=current_user.id,company_name=self.company_name).first() is not None
+            Company.query.filter_by(
+                user_id=current_user.id, company_name=self.company_name
+            ).first()
+            is not None
         )

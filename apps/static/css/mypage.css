@@ -46,6 +46,11 @@
   z-index: 1;
 }
 
+.mytable::-webkit-scrollbar {
+  /* Chrome, Safari 対応 */
+  display: none;
+}
+
 .target {
   text-align: center;
   font-size: 0.9rem;
@@ -61,8 +66,38 @@ span {
   color: #ffffff;
 }
 
-.interview {
-  background: #FFE200;
+.test {
+  background: #fa8072;
+  color: #ffffff;
+}
+
+.gd {
+  background: #ba55d3;
+  color: #ffffff;
+}
+
+.mensetu {
+  background: #ff0000;
+  color: #ffffff;
+}
+
+.mendan {
+  background: #b0c4de;
+  color: #ffffff;
+}
+
+.seminer {
+  background: #90ee90;
+  color: #ffffff;
+}
+
+.ob {
+  background: #4169e1;
+  color: #ffffff;
+}
+
+.intern {
+  background: #d2691e;
   color: #ffffff;
 }
 
@@ -152,7 +187,7 @@ span {
 }
 
 .submit-panel input {
-  background: #00CA00;
+  background: #666666;
   border: 0.1rem solid #000000;
   color: #ffffff;
   font-size: 1rem;
@@ -171,7 +206,7 @@ span {
 }
 
 .to_csv {
-  background: #00CA00;
+  background: #666666;
   border: 0.1rem solid #000000;
   color: #ffffff;
   font-size: 1rem;
