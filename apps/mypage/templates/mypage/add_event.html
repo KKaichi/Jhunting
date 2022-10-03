@@ -1,6 +1,7 @@
 {% extends "mypage/base.html" %}
 {% block title %}add_event{% endblock %}
 {% block content %}
+
 <form action="{{url_for('mypage.add_event',company_name=company_name,year_month_day=year_month_day)}}" method='POST'
   novalidate="novalidate">
   <div class="form-wrapper">
@@ -52,5 +53,6 @@
     </div>
   </div>
 </form>
+
 
 {% endblock %}

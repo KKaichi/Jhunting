@@ -1,13 +1,13 @@
-from collections import defaultdict
 from datetime import datetime
 
 from apps.account.models import UserImage
 from apps.app import db
 from apps.crud.models import User
-from apps.mypage.forms import AddCompanyForm, AddEventForm
+from apps.mypage.forms import AddCompanyForm, AddEventForm, DeleteCompanyForm
 from apps.mypage.models import Company, Event
 from flask import (
     Blueprint,
+    abort,
     current_app,
     flash,
     redirect,
@@ -55,9 +55,14 @@ def index():
         company_event = [[] for i in range(len(companise))]
         for count in range(len(companise)):
             company_list.append(companise[count].company_name)
-            events = Event.query.filter_by(
-                user_id=current_user.id, company_id=companise[count].id
-            ).all()
+            events = (
+                Event.query.filter_by(
+                    user_id=current_user.id, company_id=companise[count].id
+                )
+                .order_by(Event.start_day)
+                .order_by(Event.start_time)
+                .all()
+            )
             for event in events:
                 company_event[count].append(
                     [
@@ -132,4 +137,52 @@ def add_event(company_name, year_month_day):
         year=year,
         month=month,
         day=day,
+    )
+
+
+@mypage.route("/<company_name>", methods=["GET", "POST"])
+@login_required
+def view_company(company_name):
+    user_image = (
+        db.session.query(User, UserImage)
+        .join(UserImage)
+        .filter(User.id == UserImage.user_id)
+        .filter_by(user_id=current_user.id)
+        .first()
+    )
+    company = Company.query.filter_by(
+        user_id=current_user.id, company_name=company_name
+    ).first()
+    if company is None:
+        abort(403)
+
+    events = (
+        Event.query.filter_by(user_id=current_user.id, company_id=company.id)
+        .order_by(Event.start_day)
+        .order_by(Event.start_time)
+        .all()
+    )
+
+    delete_form = DeleteCompanyForm()
+
+    if delete_form.validate_on_submit():
+        company = Company.query.filter_by(
+            user_id=current_user.id, company_name=company_name
+        ).first()
+        event = Event.query.filter_by(
+            user_id=current_user.id, company_id=company.id
+        ).all()
+        if event != None:
+            for e in event:
+                db.session.delete(e)
+        db.session.delete(company)
+        db.session.commit()
+        return redirect(url_for("mypage.index"))
+
+    return render_template(
+        "mypage/view_company.html",
+        user_image=user_image,
+        company_name=company_name,
+        events=events,
+        delete_form=delete_form,
     )

@@ -43,3 +43,7 @@ class AddCompanyForm(FlaskForm):
     company_name = StringField("会社名", validators=[DataRequired(message="ユーザ名は必須です．")])
 
     submit = SubmitField("登録")
+
+
+class DeleteCompanyForm(FlaskForm):
+    delete = SubmitField("削除")

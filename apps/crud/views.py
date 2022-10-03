@@ -1,8 +1,8 @@
+from apps.account.models import UserImage
 from apps.app import db
 from apps.crud.forms import UserForm
 from apps.crud.models import User
-from apps.account.models import UserImage
-from apps.mypage.models import Event,Company
+from apps.mypage.models import Company, Event
 from flask import Blueprint, abort, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
@@ -30,16 +30,23 @@ def sql():
     db.session.query(User).all()
     return "コンソールログを確認してください"
 
+
 @crud.route("/users")
 @login_required
 def users():
     if current_user.email != "kkaichi.sea.earth@gmail.com":
         return abort(400)
     users = User.query.all()
-    users_image=UserImage.query.all()
-    event=Event.query.all()
-    company=Company.query.all()
-    return render_template("crud/index.html", users=users,users_image=users_image,event=event,company=company)
+    users_image = UserImage.query.all()
+    event = Event.query.all()
+    company = Company.query.all()
+    return render_template(
+        "crud/index.html",
+        users=users,
+        users_image=users_image,
+        event=event,
+        company=company,
+    )
 
 
 @crud.route("/users/<user_id>", methods=["GET", "POST"])
@@ -73,7 +80,7 @@ def delete_user(user_id):
     db.session.delete(user)
     if user_image != None:
         db.session.delete(user_image)
-    if event!= None:
+    if event != None:
         for e in event:
             db.session.delete(e)
     if company != None:

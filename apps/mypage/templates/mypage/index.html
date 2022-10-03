@@ -54,6 +54,9 @@
           for (var colum = 0; colum < 91; colum++) {
             if (colum == 0) {
               var th = document.createElement('th');
+              th.ondblclick = function () {
+                location.href = "{{url_for('mypage.view_company',company_name='company_name')}}".replace("company_name", tableEle.rows[this.parentNode.rowIndex].cells[this.cellIndex].innerHTML);
+              };
               th.innerHTML = company_list[row];
               tr.appendChild(th);
             }

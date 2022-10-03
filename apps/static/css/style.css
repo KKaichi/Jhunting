@@ -4,6 +4,17 @@
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  background-color: #F4F5F7;
+  color: #5e5e5e;
+  margin-bottom: 5em;
+}
+
 /*header*/
 header {
   width: 100%;
@@ -66,9 +77,6 @@ header {
 }
 
 /*main*/
-.main {
-  background: #F4F5F7;
-}
 
 footer {
   position: absolute;
@@ -89,11 +97,8 @@ footer p {
   margin: auto;
 }
 
-.text p {
-  padding-bottom: 2rem;
-}
 
-.text li {
-  float: left;
-  padding-right: 1.5rem;
+footer {
+  bottom: 0;
+  position: absolute;
 }
