@@ -1,15 +1,16 @@
 {% extends "mypage/base.html" %}
-{% block title %}add_event{% endblock %}
+{% block title %}edit_event{% endblock %}
 {% block content %}
 
-<form action="{{url_for('mypage.add_event',company_name=company_name,year_month_day=year_month_day)}}" method='POST'
-  novalidate="novalidate">
+<form
+  action="{{url_for('mypage.edit_event',company_name=company_name,year_month_day=year_month_day,event_name=event_name)}}"
+  method='POST' novalidate="novalidate">
   <div class="form-wrapper">
-    <h2>{{company_name}}のイベントを追加する</h2>
+    <h2>{{company_name}}の{{event_name}}({{month}}/{{day}})を編集する</h2>
     <div class="form-radio">
       <p class="discription">イベント</p>
-      {{form.csrf_token}}
-      {% for radio in form.event_type %}
+      {{edit_form.csrf_token}}
+      {% for radio in edit_form.event_type %}
       {% if radio.id == "event_type-0" %}
       {{radio}} <span class="es_radio">{{radio.label}}</span>
       {% elif radio.id == "event_type-1" %}
@@ -28,28 +29,33 @@
       {{radio}} <span class="intern_radio">{{radio.label}}</span>
       {% endif %}
       {% endfor %}
-      {% for error in form.event_type.errors %}
+      {% for error in edit_form.event_type.errors %}
       <span style="color:red;">* どれか1つ選択してください．</span>
       {% endfor%}
     </div>
     <div class="big_time">
       <div class="time">
         <p class="discription">開始</p>
-        <span>{{form.start_date(value=year+"-"+month+"-"+day,min=year+"-"+month+"-"+day,max="2025-03-31")}}</span>
-        <span>{{form.start_time(value="00:00")}}</span>
+        <span>{{edit_form.start_date(min=year+"-"+month+"-"+day,max="2025-03-31")}}</span>
+        <span>{{edit_form.start_time()}}</span>
       </div>
       <div class="time">
         <p class="discription">終了</p>
-        <span>{{form.finish_date(value=year+"-"+month+"-"+day,min=year+"-"+month+"-"+day,max="2025-03-31")}}</span>
-        <span>{{form.finish_time(value="23:00")}}</span>
+        <span>{{edit_form.finish_date(min=year+"-"+month+"-"+day,max="2025-03-31")}}</span>
+        <span>{{edit_form.finish_time()}}</span>
       </div>
     </div>
     <div class="memo">
       <p class="discription">メモ</p>
-      <span>{{form.discription()}}</span>
+      <span>{{edit_form.discription()}}</span>
     </div>
-    <div class="button-panel">
-      <p>{{form.submit()}}</p>
+    <div class="big_button">
+      <div class="button-panel">
+        <p>{{edit_form.submit()}}</p>
+      </div>
+      <div class="button-panel">
+        <p>{{delete_form.delete()}}</p>
+      </div>
     </div>
   </div>
 </form>

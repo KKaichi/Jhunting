@@ -1,7 +1,6 @@
 {% extends "mypage/base.html" %}
 {% block title %}{{current_user.username}}{% endblock %}
 {% block content %}
-
 {% if company_list != 0 %}
 <div class="mytable">
   <table id="mytable">
@@ -63,7 +62,7 @@
             else {
               var td = document.createElement('td');
               td.ondblclick = function () {
-                location.href = "{{url_for('mypage.add_event',company_name='company_name' ,year_month_day = 'year_month_day')}}".replace("year_month_day", tableEle.rows[0].cells[this.cellIndex].id).replace("company_name", tableEle.rows[this.parentNode.rowIndex].cells[0].innerHTML);
+                location.href = "{{url_for('mypage.add_event',company_name='company_name' ,year_month_day = 'year_month_day')}}".replace("company_name", tableEle.rows[this.parentNode.rowIndex].cells[0].innerHTML).replace("year_month_day", tableEle.rows[0].cells[this.cellIndex].id);
               };
               td.innerHTML = `<div class=target><span></span></div>`;
               tr.appendChild(td);
@@ -91,7 +90,8 @@
             var memo = company_event[i][j][5]
             if (start_month + "/" + start_day in month_day_index) {
               cell_index = month_day_index[start_month + "/" + start_day]
-              tableEle.rows[i + 1].cells[cell_index + 1].innerHTML += `<div class=target><span class=` + event_class[event_name] + `> ` + event_name.substr(0, 2) + `</span ></div >`;
+              click_href = "{{url_for('mypage.edit_event',company_name='company_name',year_month_day='year_month_day',event_name='event_name')}}".replace("company_name", tableEle.rows[i + 1].cells[0].innerHTML).replace("year_month_day", tableEle.rows[0].cells[cell_index + 1].id).replace("event_name", event_name);
+              tableEle.rows[i + 1].cells[cell_index + 1].innerHTML += "<div class=target><span class=" + event_class[event_name] + "><a href=" + click_href + ">" + event_name.substr(0, 2) + "</a></span ></div >";
             }
 
           }

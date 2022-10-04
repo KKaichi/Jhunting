@@ -2,55 +2,62 @@
 {% block title %}view_company{% endblock %}
 {% block content %}
 <div class="form-wrapper">
-  <h1>{{company_name}}</h1>
-  <form action="{{url_for('mypage.view_company',company_name=company_name)}}" method='POST'>
-    {{delete_form.csrf_token}}
-    <p>{{delete_form.delete()}}</p>
-  </form>
-  {% for event in events %}
-  <p>{{event.event_name}}</p>
-  {% if event.start_day == event.finish_day and event.start_time.minute == 0 and event.finish_time.minute ==
-  0 %}
-  <p>{{event.start_day.month}}/{{event.start_day.day}} {{event.start_time.hour}}時 ~
-    {{event.finish_time.hour}}時</p>
-  {% elif event.start_day == event.finish_day and event.start_time.minute != 0 and
-  event.finish_time.minute ==
-  0 %}
-  <p>{{event.start_day.month}}/{{event.start_day.day}} {{event.start_time.hour}}時{{event.start_time.minute}}分 ~
-    {{event.finish_time.hour}}時</p>
-  {% elif event.start_day == event.finish_day and event.start_time.minute == 0 and
-  event.finish_time.minute !=
-  0 %}
-  <p>{{event.start_day.month}}/{{event.start_day.day}} {{event.start_time.hour}}時 ~
-    {{event.finish_time.hour}}時 {event.finish_time.minute}}分</p>
-  {% elif event.start_day == event.finish_day and event.start_time.minute != 0 and
-  event.finish_time.minute !=
-  0 %}
-  <p>{{event.start_day.month}}/{{event.start_day.day}} {{event.start_time.hour}}時{{event.start_time.minute}}分 ~
-    {{event.finish_time.hour}}時 {event.finish_time.minute}}分</p>
-  {% elif event.start_day != event.finish_day and event.start_time.minute == 0 and event.finish_time.minute ==
-  0 %}
-  <p>{{event.start_day.month}}/{{event.start_day.day}} {{event.start_time.hour}}時 ~
-    {{event.finish_day.month}}/{{event.finish_day.day}} {{event.finish_time.hour}}時</p>
-  {% elif event.start_day != event.finish_day and event.start_time.minute != 0 and
-  event.finish_time.minute ==
-  0 %}
-  <p>{{event.start_day.month}}/{{event.start_day.day}} {{event.start_time.hour}}時{{event.start_time.minute}}分 ~
-    {{event.finish_day.month}}/{{event.finish_day.day}} {{event.finish_time.hour}}時</p>
-  {% elif event.start_day != event.finish_day and event.start_time.minute == 0 and
-  event.finish_time.minute !=
-  0 %}
-  <p>{{event.start_day.month}}/{{event.start_day.day}} {{event.start_time.hour}}時 ~
-    {{event.finish_day.month}}/{{event.finish_day.day}} {{event.finish_time.hour}}時{{event.finish_time.minute}}分</p>
-  {% elif event.start_day != event.finish_day and event.start_time.minute != 0 and
-  event.finish_time.minute !=
-  0 %}
-  <p>{{event.start_day.month}}/{{event.start_day.day}} {{event.start_time.hour}}時{{event.start_time.minute}}分 ~
-    {{event.finish_day.month}}/{{event.finish_day.day}} {{event.finish_time.hour}}時{{event.finish_time.minute}}分</p>
-  {% endif %}
-  {% if memo != "" %}
-  <p>{{event.memo}}</p>
-  {% endif %}
-  {% endfor %}
+  <div class="company_event">
+    <h2>{{company_name}}</h2>
+    {% for event in events %}
+    {% if event.start_day == event.finish_day and event.start_time.minute == 0 and event.finish_time.minute ==
+    0 %}
+    <p>{{event.event_name}} {{event.start_day.month}}/{{event.start_day.day}} {{event.start_time.hour}}時 ~
+      {{event.finish_time.hour}}時</p>
+    {% elif event.start_day == event.finish_day and event.start_time.minute != 0 and
+    event.finish_time.minute ==
+    0 %}
+    <p>{{event.event_name}} {{event.start_day.month}}/{{event.start_day.day}}
+      {{event.start_time.hour}}時{{event.start_time.minute}}分 ~
+      {{event.finish_time.hour}}時</p>
+    {% elif event.start_day == event.finish_day and event.start_time.minute == 0 and
+    event.finish_time.minute !=
+    0 %}
+    <p>{{event.event_name}} {{event.start_day.month}}/{{event.start_day.day}} {{event.start_time.hour}}時 ~
+      {{event.finish_time.hour}}時 {event.finish_time.minute}}分</p>
+    {% elif event.start_day == event.finish_day and event.start_time.minute != 0 and
+    event.finish_time.minute !=
+    0 %}
+    <p>{{event.event_name}} {{event.start_day.month}}/{{event.start_day.day}}
+      {{event.start_time.hour}}時{{event.start_time.minute}}分 ~
+      {{event.finish_time.hour}}時 {event.finish_time.minute}}分</p>
+    {% elif event.start_day != event.finish_day and event.start_time.minute == 0 and event.finish_time.minute ==
+    0 %}
+    <p>{{event.event_name}} {{event.start_day.month}}/{{event.start_day.day}} {{event.start_time.hour}}時 ~
+      {{event.finish_day.month}}/{{event.finish_day.day}} {{event.finish_time.hour}}時</p>
+    {% elif event.start_day != event.finish_day and event.start_time.minute != 0 and
+    event.finish_time.minute ==
+    0 %}
+    <p>{{event.event_name}} {{event.start_day.month}}/{{event.start_day.day}}
+      {{event.start_time.hour}}時{{event.start_time.minute}}分 ~
+      {{event.finish_day.month}}/{{event.finish_day.day}} {{event.finish_time.hour}}時</p>
+    {% elif event.start_day != event.finish_day and event.start_time.minute == 0 and
+    event.finish_time.minute !=
+    0 %}
+    <p>{{event.event_name}} {{event.start_day.month}}/{{event.start_day.day}} {{event.start_time.hour}}時 ~
+      {{event.finish_day.month}}/{{event.finish_day.day}} {{event.finish_time.hour}}時{{event.finish_time.minute}}分</p>
+    {% elif event.start_day != event.finish_day and event.start_time.minute != 0 and
+    event.finish_time.minute !=
+    0 %}
+    <p>{{event.event_name}} {{event.start_day.month}}/{{event.start_day.day}}
+      {{event.start_time.hour}}時{{event.start_time.minute}}分 ~
+      {{event.finish_day.month}}/{{event.finish_day.day}} {{event.finish_time.hour}}時{{event.finish_time.minute}}分 </p>
+    {% endif %}
+    {% if event.memo != "" %}
+    <p>メモ:　{{event.memo}}</p>
+    {% endif %}
+    {% endfor %}
+    <form action="{{url_for('mypage.view_company',company_name=company_name)}}" method='POST'>
+      {{delete_form.csrf_token}}
+      <div class="button-panel">
+        <p>{{delete_form.delete()}}</p>
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock %}
